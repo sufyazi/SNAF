@@ -17,9 +17,12 @@ import atexit
 
 @atexit.register
 def clear_assets():
-    imgs = os.listdir('assets')
-    for img in imgs:
-        os.remove(os.path.join('assets',img))
+    try:
+        imgs = os.listdir('assets')
+        for img in imgs:
+            os.remove(os.path.join('assets', img))
+    except (FileNotFoundError, OSError):
+        pass
 
 
 def run_dash_T_antigen(input_abs_path,remove_cols=['uid'],host=None,port='8050',output_abs_path=None):
